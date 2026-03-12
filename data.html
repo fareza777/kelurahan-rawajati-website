@@ -126,154 +126,38 @@
         <div class="container">
             <div class="section-header">
                 <h2>Data Kependudukan</h2>
-                <p>Informasi lengkap tentang demografi dan distribusi penduduk</p>
+                <p>Informasi lengkap tentang demografi dan distribusi penduduk Kelurahan Rawajati</p>
             </div>
             
-            <div class="data-grid">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <i class="fas fa-chart-pie"></i>
-                        <h3>Usia Produktif</h3>
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Komposisi Agama</h3>
                     </div>
-                    <div class="data-card-body">
-                        <div class="progress-group">
-                            <div class="progress-item">
-                                <div class="progress-label">
-                                    <span>0-14 tahun</span>
-                                    <span>18.5%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 18.5%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-item">
-                                <div class="progress-label">
-                                    <span>15-64 tahun (Produktif)</span>
-                                    <span>68.2%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 68.2%"></div>
-                                </div>
-                            </div>
-                            <div class="progress-item">
-                                <div class="progress-label">
-                                    <span>65+ tahun</span>
-                                    <span>13.3%</span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 13.3%"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="chart-body">
+                        <canvas id="agamaChart"></canvas>
                     </div>
                 </div>
                 
-                <div class="data-card">
-                    <div class="data-card-header">
+                <div class="chart-card">
+                    <div class="chart-header">
                         <i class="fas fa-graduation-cap"></i>
                         <h3>Tingkat Pendidikan</h3>
                     </div>
-                    <div class="data-card-body">
-                        <div class="education-stats">
-                            <div class="edu-item">
-                                <div class="edu-icon"><i class="fas fa-school"></i></div>
-                                <div class="edu-content">
-                                    <div class="edu-label">SD/Sederajat</div>
-                                    <div class="edu-value">32.5%</div>
-                                </div>
-                            </div>
-                            <div class="edu-item">
-                                <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-                                <div class="edu-content">
-                                    <div class="edu-label">SMP/Sederajat</div>
-                                    <div class="edu-value">24.8%</div>
-                                </div>
-                            </div>
-                            <div class="edu-item">
-                                <div class="edu-icon"><i class="fas fa-university"></i></div>
-                                <div class="edu-content">
-                                    <div class="edu-label">SMA/Sederajat</div>
-                                    <div class="edu-value">28.3%</div>
-                                </div>
-                            </div>
-                            <div class="edu-item">
-                                <div class="edu-icon"><i class="fas fa-user-graduate"></i></div>
-                                <div class="edu-content">
-                                    <div class="edu-label">D3/S1/S2/S3</div>
-                                    <div class="edu-value">14.4%</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="chart-body">
+                        <canvas id="pendidikanChart"></canvas>
                     </div>
                 </div>
                 
-                <div class="data-card">
-                    <div class="data-card-header">
+                <div class="chart-card">
+                    <div class="chart-header">
                         <i class="fas fa-briefcase"></i>
                         <h3>Mata Pencaharian</h3>
                     </div>
-                    <div class="data-card-body">
-                        <div class="occupation-list">
-                            <div class="occupation-item">
-                                <span class="occupation-label">PNS/TNI/Polri</span>
-                                <span class="occupation-value">12.5%</span>
-                            </div>
-                            <div class="occupation-item">
-                                <span class="occupation-label">Wiraswasta/Entrepreneur</span>
-                                <span class="occupation-value">28.7%</span>
-                            </div>
-                            <div class="occupation-item">
-                                <span class="occupation-label">Karyawan Swasta</span>
-                                <span class="occupation-value">35.2%</span>
-                            </div>
-                            <div class="occupation-item">
-                                <span class="occupation-label">Buruh</span>
-                                <span class="occupation-value">8.9%</span>
-                            </div>
-                            <div class="occupation-item">
-                                <span class="occupation-label">Ibu Rumah Tangga</span>
-                                <span class="occupation-value">10.4%</span>
-                            </div>
-                            <div class="occupation-item">
-                                <span class="occupation-label">Lainnya</span>
-                                <span class="occupation-value">4.3%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <i class="fas fa-mosque"></i>
-                        <h3>Agama</h3>
-                    </div>
-                    <div class="data-card-body">
-                        <div class="religion-list">
-                            <div class="religion-item">
-                                <span class="religion-label">Islam</span>
-                                <span class="religion-value">87.5%</span>
-                            </div>
-                            <div class="religion-item">
-                                <span class="religion-label">Kristen Protestan</span>
-                                <span class="religion-value">5.8%</span>
-                            </div>
-                            <div class="religion-item">
-                                <span class="religion-label">Katolik</span>
-                                <span class="religion-value">3.2%</span>
-                            </div>
-                            <div class="religion-item">
-                                <span class="religion-label">Hindu</span>
-                                <span class="religion-value">1.8%</span>
-                            </div>
-                            <div class="religion-item">
-                                <span class="religion-label">Buddha</span>
-                                <span class="religion-value">1.5%</span>
-                            </div>
-                            <div class="religion-item">
-                                <span class="religion-label">Konghucu</span>
-                                <span class="religion-value">0.2%</span>
-                            </div>
-                        </div>
+                    <div class="chart-body">
+                        <canvas id="pekerjaanChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -627,7 +511,118 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/chatbot.js"></script>
+    <script>
+    // Chart.js Configuration for Data Page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Common Chart Options
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        font: {
+                            family: "'Inter', sans-serif",
+                            size: 12
+                        },
+                        usePointStyle: true,
+                        pointStyle: 'circle'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: 12,
+                    titleFont: {
+                        family: "'Inter', sans-serif",
+                        size: 13
+                    },
+                    bodyFont: {
+                        family: "'Inter', sans-serif",
+                        size: 12
+                    },
+                    cornerRadius: 8,
+                    displayColors: true,
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed + '%';
+                        }
+                    }
+                }
+            }
+        };
+
+        // Agama Chart
+        const agamaCtx = document.getElementById('agamaChart').getContext('2d');
+        new Chart(agamaCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Islam', 'Kristen Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghucu'],
+                datasets: [{
+                    data: [87.5, 5.8, 3.2, 1.8, 1.5, 0.2],
+                    backgroundColor: [
+                        '#00A651',  // Tosca - Islam
+                        '#E30613',  // Primary Red - Kristen
+                        '#0066CC',  // Blue - Katolik
+                        '#FF6B00',  // Orange - Hindu
+                        '#FFD700',  // Gold - Buddha
+                        '#8B4513'   // Brown - Konghucu
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: commonOptions
+        });
+
+        // Pendidikan Chart
+        const pendidikanCtx = document.getElementById('pendidikanChart').getContext('2d');
+        new Chart(pendidikanCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['SD/Sederajat', 'SMP/Sederajat', 'SMA/Sederajat', 'D3/S1/S2/S3'],
+                datasets: [{
+                    data: [32.5, 24.8, 28.3, 14.4],
+                    backgroundColor: [
+                        '#00A651',  // Tosca
+                        '#008a42',  // Dark Tosca
+                        '#E30613',  // Primary Red
+                        '#c40510'   // Dark Red
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: commonOptions
+        });
+
+        // Pekerjaan Chart
+        const pekerjaanCtx = document.getElementById('pekerjaanChart').getContext('2d');
+        new Chart(pekerjaanCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['PNS/TNI/Polri', 'Wiraswasta', 'Karyawan Swasta', 'Buruh', 'IRT', 'Lainnya'],
+                datasets: [{
+                    data: [12.5, 28.7, 35.2, 8.9, 10.4, 4.3],
+                    backgroundColor: [
+                        '#0066CC',  // Blue - PNS
+                        '#00A651',  // Tosca - Wiraswasta
+                        '#E30613',  // Red - Karyawan
+                        '#FF6B00',  // Orange - Buruh
+                        '#9B59B6',  // Purple - IRT
+                        '#95A5A6'   // Gray - Lainnya
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: commonOptions
+        });
+    });
+    </script>
 </body>
 </html>
