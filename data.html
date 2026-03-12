@@ -512,12 +512,13 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/chatbot.js"></script>
     <script>
     // Chart.js Configuration for Data Page
     document.addEventListener('DOMContentLoaded', function() {
-        // Common Chart Options
+        // Common Chart Options with DataLabels
         const commonOptions = {
             responsive: true,
             maintainAspectRatio: true,
@@ -525,33 +526,52 @@
                 legend: {
                     position: 'bottom',
                     labels: {
-                        padding: 15,
+                        padding: 20,
                         font: {
                             family: "'Inter', sans-serif",
-                            size: 12
+                            size: 13,
+                            weight: 500
                         },
                         usePointStyle: true,
-                        pointStyle: 'circle'
+                        pointStyle: 'circle',
+                        padding: 20
                     }
                 },
                 tooltip: {
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                    padding: 12,
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                    padding: 14,
                     titleFont: {
                         family: "'Inter', sans-serif",
-                        size: 13
+                        size: 14,
+                        weight: 600
                     },
                     bodyFont: {
                         family: "'Inter', sans-serif",
-                        size: 12
+                        size: 13
                     },
-                    cornerRadius: 8,
+                    cornerRadius: 10,
                     displayColors: true,
                     callbacks: {
                         label: function(context) {
-                            return context.label + ': ' + context.parsed + '%';
+                            const value = context.parsed;
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return ` ${value}% (${percentage} dari total)`;
                         }
                     }
+                },
+                datalabels: {
+                    color: '#ffffff',
+                    font: {
+                        family: "'Inter', sans-serif",
+                        size: 13,
+                        weight: 700
+                    },
+                    formatter: function(value) {
+                        return value + '%';
+                    },
+                    anchor: 'center',
+                    align: 'center'
                 }
             }
         };
@@ -561,7 +581,7 @@
         new Chart(agamaCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Islam', 'Kristen Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghucu'],
+                labels: ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu'],
                 datasets: [{
                     data: [87.5, 5.8, 3.2, 1.8, 1.5, 0.2],
                     backgroundColor: [
@@ -572,7 +592,7 @@
                         '#FFD700',  // Gold - Buddha
                         '#8B4513'   // Brown - Konghucu
                     ],
-                    borderWidth: 2,
+                    borderWidth: 3,
                     borderColor: '#ffffff'
                 }]
             },
@@ -584,16 +604,16 @@
         new Chart(pendidikanCtx, {
             type: 'doughnut',
             data: {
-                labels: ['SD/Sederajat', 'SMP/Sederajat', 'SMA/Sederajat', 'D3/S1/S2/S3'],
+                labels: ['SD', 'SMP', 'SMA', 'D3/S1+'],
                 datasets: [{
                     data: [32.5, 24.8, 28.3, 14.4],
                     backgroundColor: [
                         '#00A651',  // Tosca
-                        '#008a42',  // Dark Tosca
+                        '#00c260',  // Light Tosca
                         '#E30613',  // Primary Red
-                        '#c40510'   // Dark Red
+                        '#ff1a28'   // Light Red
                     ],
-                    borderWidth: 2,
+                    borderWidth: 3,
                     borderColor: '#ffffff'
                 }]
             },
@@ -605,7 +625,7 @@
         new Chart(pekerjaanCtx, {
             type: 'doughnut',
             data: {
-                labels: ['PNS/TNI/Polri', 'Wiraswasta', 'Karyawan Swasta', 'Buruh', 'IRT', 'Lainnya'],
+                labels: ['PNS/TNI/Polri', 'Wiraswasta', 'Karyawan', 'Buruh', 'IRT', 'Lainnya'],
                 datasets: [{
                     data: [12.5, 28.7, 35.2, 8.9, 10.4, 4.3],
                     backgroundColor: [
@@ -616,7 +636,7 @@
                         '#9B59B6',  // Purple - IRT
                         '#95A5A6'   // Gray - Lainnya
                     ],
-                    borderWidth: 2,
+                    borderWidth: 3,
                     borderColor: '#ffffff'
                 }]
             },
