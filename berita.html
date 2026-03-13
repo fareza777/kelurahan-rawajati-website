@@ -16,6 +16,440 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* News Filter Section */
+        .news-filter-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .news-filter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.1)"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.5;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .filter-tab {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .filter-tab.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* News Grid Section */
+        .news-grid-section {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        /* Modern News Card */
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+        
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .news-card:hover::before {
+            opacity: 1;
+        }
+        
+        .news-image {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+        
+        .news-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .news-card:hover .news-img {
+            transform: scale(1.1);
+        }
+        
+        .news-category-badge {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+        
+        .news-category-badge.pembangunan {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+        }
+        
+        .news-category-badge.kegiatan {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+        }
+        
+        .news-category-badge.layanan {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .news-category-badge.kesiapsiagaan {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+        
+        .news-content {
+            padding: 2rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            gap: 1.25rem;
+            font-size: 0.875rem;
+            color: #95a5a6;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .news-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .news-meta i {
+            color: #667eea;
+        }
+        
+        .news-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 1rem 0;
+            line-height: 1.4;
+            transition: color 0.3s ease;
+        }
+        
+        .news-card:hover .news-title {
+            color: #667eea;
+        }
+        
+        .news-excerpt {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 1.25rem 0;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #667eea;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .read-more:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .read-more i {
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Full Article Modal */
+        .full-article-section {
+            display: none;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .article-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #f0f0f0;
+        }
+        
+        .article-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #2c3e50;
+            line-height: 1.3;
+            margin: 0;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        
+        .article-meta-item i {
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+        
+        .article-featured-image {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .article-content {
+            line-height: 1.9;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content strong {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            padding: 1.5rem 2rem;
+            border-left: 5px solid #667eea;
+            margin: 2rem 0;
+            border-radius: 12px;
+            font-style: italic;
+            color: #555;
+            position: relative;
+        }
+        
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: #667eea;
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(241, 196, 15, 0.1));
+            padding: 1.5rem 2rem;
+            border-left: 5px solid #f39c12;
+            margin: 2rem 0;
+            border-radius: 12px;
+            font-weight: 600;
+            color: #d35400;
+        }
+        
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 3px solid #f0f0f0;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-print, .btn-close {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+        }
+        
+        .btn-print {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .btn-close {
+            background: #f0f0f0;
+            color: #555;
+        }
+        
+        .btn-close:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .filter-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-tab {
+                justify-content: center;
+            }
+            
+            .article-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .article-title {
+                font-size: 1.5rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .full-article-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -58,125 +492,8 @@
                 <span class="separator"><i class="fas fa-chevron-right"></i></span>
                 <span class="current">Berita</span>
             </div>
-            <h1>Berita Kelurahan</h1>
+            <h1><i class="fas fa-newspaper"></i> Berita Kelurahan</h1>
             <p>Informasi terkini dan kegiatan masyarakat Kelurahan Rawajati</p>
-        </div>
-    </section>
-
-    <!-- Featured News -->
-    <section class="featured-news-section" id="simulasi-bencana">
-        <div class="container">
-            <div class="featured-news">
-                <div class="featured-image">
-                    <img src="images/simulasi-bencana-2025.png" alt="Simulasi Kesiapsiagaan Bencana Rawajati" class="featured-img">
-                    <div class="featured-badge">
-                        <i class="fas fa-star"></i>
-                        <span>Berita Utama</span>
-                    </div>
-                </div>
-                <div class="featured-content">
-                    <div class="news-meta">
-                        <span class="news-category"><i class="fas fa-tag"></i> Kesiapsiagaan Bencana</span>
-                        <span class="news-date"><i class="fas fa-calendar"></i> Selasa, 23 Desember 2025 12:32 WIB</span>
-                    </div>
-                    <h2>150 Personel Gabungan Ikuti Simulasi Kesiapsiagaan Bencana di Rawajati</h2>
-                    <p><strong>Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</strong></p>
-                    <p>Camat Pancoran, Alamsah memimpin langsung apel dan simulasi kesiapsiagaan bencana yang diikuti sebanyak 150 personel gabungan, Selasa (23/12). Kegiatan berlangsung di halaman Kantor Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan.</p>
-                    <p>Alamsah menuturkan, Kelurahan Rawajati merupakan salah satu wilayah yang sering terdampak banjir karena lokasinya yang berdekatan dengan aliran Kali Ciliwung. Setidaknya ada tiga RW yang kerap terendam banjir setiap tahunnya.</p>
-                    <p>"Kami berharap dengan adanya simulasi ini, semua pihak bisa lebih siap dan sigap dalam menghadapi bencana, khususnya banjir. Koordinasi antar instansi harus terus diperkuat," ujar Alamsah.</p>
-                    <p>Sementara itu, Kepala Bidang Sumber Daya Air, Badan Pengembangan Infrastruktur (BPI) DKI Jakarta, Hendi Mulyana menjelaskan, saat ini pembangunan pompa di Rawajati yang dikerjakan oleh Balai Besar Wilayah Sungai (BBWS) Ciliwung Cisadane sudah mencapai 50 persen.</p>
-                    <p>Lurah Rawajati, Sariman menambahkan, dari tiga RW yang terdampak, RW 07 merupakan wilayah yang paling parah. Saat banjir datang, warga biasanya mengungsi ke lantai dua rumah mereka.</p>
-                    <p>"Kami sudah menyiapkan posko pengungsian di beberapa titik. Kerjasama dengan BPBD juga sangat baik dalam hal penyiapan tenda dan logistik," kata Sariman.</p>
-                    <p>Kepala Pelaksana BPBD Jakarta Selatan, Dedi Kusmana mengatakan, pihaknya mengerahkan Pasukan Oranye untuk mendirikan tenda di lokasi simulasi. Mereka juga mempraktikkan cara menyiapkan dapur umum dan mendistribusikan bantuan logistik kepada warga terdampak.</p>
-                    <a href="#" class="btn btn-primary" onclick="window.print(); return false;">
-                        <i class="fas fa-print"></i> Cetak Artikel
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Full Article Section: Penataan Kawasan -->
-            <div class="full-article-section" id="penataan-kawasan-full" style="display:none; margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h2 style="margin: 0; color: #c0392b;">Warga Apresiasi Penataan Kawasan Unggulan di Jalan Rawajati Barat</h2>
-                    <button onclick="document.getElementById('penataan-kawasan-full').style.display='none'" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;"><i class="fas fa-times"></i></button>
-                </div>
-                <div class="news-meta" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #ecf0f1;">
-                    <span style="margin-right: 1.5rem;"><i class="fas fa-calendar"></i> Selasa, 30 September 2025 08:32 WIB</span>
-                    <span style="margin-right: 1.5rem;"><i class="fas fa-eye"></i> 1094 views</span>
-                    <span><i class="fas fa-user"></i> Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</span>
-                </div>
-                <img src="images/penataan-kawasan-2025.png" alt="Penataan Kawasan Rawajati Barat" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
-                <div class="article-content" style="line-height: 1.8; color: #333;">
-                    <p style="font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin-bottom: 1.5rem;">Penataan Kawasan Unggulan Triwulan III di Jalan Rawajati Barat, RT 01/04, Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan, rampung dilakukan dan diapresiasi warga.</p>
-                    
-                    <p><strong>"Sangat bagus"</strong></p>
-                    
-                    <p>Salah seorang warga, Herman mengatakan, penataan kawasan yang dilakukan pihak kelurahan membuat lingkungan semakin indah, asri, bersih, dan berwarna.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #c0392b; margin: 1.5rem 0;">"Sangat bagus, memang lokasi ini sebelumnya sangat tidak terurus, kumuh. Semoga saja lokasi lainnya juga ditata nantinya, supaya setiap RW punya daya tariknya masing-masing," ujarnya, Selasa (30/9).</p>
-                    
-                    <h3 style="color: #c0392b; margin-top: 2rem;">Progres Penataan Kawasan Unggulan di Rorotan Capai 95 Persen</h3>
-                    
-                    <p>Sementara itu, Lurah Rawajati, Sariman menjelaskan, sebelum ditata, dulunya lahan tersebut adalah lahan kosong yang tidak terawat hingga banyak orang tidak bertanggung jawab membuang sampah di lokasi itu.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #27ae60; margin: 1.5rem 0;">"Posisi lahan berada di pinggir rel kereta, jadi banyak warga juga menyebrang melalui pagar perlintasan yang bolong," ujarnya, Selasa (30/9).</p>
-                    
-                    <p>Sariman menjelaskan, dalam melakukan penataan di atas lahan seluas 120 meter persegi dikerahkan lima personel Pasukan Oranye.</p>
-                    
-                    <p>Dalam penataan kawasan itu, imbuhnya, juga bekerjasama dengan jajaran Sudin Bina Marga untuk merapikan jalan setapak, Sudin KPKP terkait ketahanan pangan, Sudin Lingkungan Hidup membantu tempat pembuangan sampah dan Sudin Tamhut Jakarta Selatan dalam hal penghijauan.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #2980b9; margin: 1.5rem 0;">"Pagar pembatas juga kami tambah dengan besi dan kayu. Kemudian agar terlihat indah dan rapi kami tambahkan mural," terangnya.</p>
-                    
-                    <p>Sariman mengimbau kepada warga, pengurus RT dan RW setempat untuk selalu menjaga kebersihan di lokasi penataan yang sudah rapi dan indah ini, terutama untuk tidak membuang sampah sembarangan maupun melakukan vandalisme.</p>
-                    
-                    <p style="background: #fff3cd; padding: 1rem; border-left: 4px solid #f39c12; margin: 1.5rem 0; font-weight: 600;">"Seluruh penataan yang kita lakukan terus kita jaga. Jadi saya minta warga juga berkontribusi aktif menjaganya dengan baik," tandasnya.</p>
-                </div>
-                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #ecf0f1; display: flex; gap: 1rem;">
-                    <button onclick="window.print()" style="background: #c0392b; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fas fa-print"></i> Cetak Artikel</button>
-                    <button onclick="document.getElementById('penataan-kawasan-full').style.display='none'" style="background: #95a5a6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fas fa-times"></i> Tutup</button>
-                </div>
-            </div>
-            
-            <!-- Full Article Section: Penanganan Banjir -->
-            <div class="full-article-section" id="penanganan-banjir-full" style="display:none; margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h2 style="margin: 0; color: #c0392b;">Penanganan Banjir di Pejaten Timur dan Rawajati Berlangsung Optimal</h2>
-                    <button onclick="document.getElementById('penanganan-banjir-full').style.display='none'" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;"><i class="fas fa-times"></i></button>
-                </div>
-                <div class="news-meta" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #ecf0f1;">
-                    <span style="margin-right: 1.5rem;"><i class="fas fa-calendar"></i> Senin, 07 Juli 2025 14:32 WIB</span>
-                    <span style="margin-right: 1.5rem;"><i class="fas fa-eye"></i> 941 views</span>
-                    <span><i class="fas fa-user"></i> Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</span>
-                </div>
-                <img src="images/penanganan-banjir-2025.png" alt="Penanganan Banjir Rawajati" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
-                <div class="article-content" style="line-height: 1.8; color: #333;">
-                    <p style="font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin-bottom: 1.5rem;">Penanganan pascabanjir di Kelurahan Pejaten Timur, Kecamatan Pasar Minggu dan Kelurahan Rawajati, Pancoran Jakarta Selatan berlangsung optimal.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #27ae60; margin: 1.5rem 0;">"Siang ini Membuat lingkungan warga kembali bersih"</p>
-                    
-                    <p>Lurah Pejaten Timur, Rocky A Tarigan mengatakan, genangan setinggi kurang lebih 50 sentimeter sejak Minggu (6/7) kemarin terjadi disebabkan curah hujan tinggi yang membuat air Kali Ciliwung meluap ke permukiman warga.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #3498db; margin: 1.5rem 0;">"Di sini ada 4 RT yang terdampak, sempat ada yang mengungsi di salah satu SD deket permukiman mereka. Namun, pagi tadi mereka sudah kembali ke rumahnya masing-masing," ujarnya, Senin (7/7).</p>
-                    
-                    <p>Rocky menjelaskan, dalam membantu warga melakukan pembersihan pascabanjir, total sebanyak 40 personel gabungan dikerahkan ke sejumlah lokasi.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #e67e22; margin: 1.5rem 0;">"Kami juga sudah meminta bantuan Suku Lingkungan Hidup dan Suku Dinas Gulkarmat Jakarta Selatan. Semoga saja lumpur setinggi 20-40 sentimeter dapat kita atasi dalam waktu satu sampai tiga hari ke depan," harapnya.</p>
-                    
-                    <h3 style="color: #c0392b; margin-top: 2rem;">Lurah Rawajati: Genangan Sudah Surut Total</h3>
-                    
-                    <p>Sementara itu, Lurah Rawajati, Sariman menyebut, genangan berkisar 80-100 sentimeter yang merendam tujuh RT di RW 01, 07 dan RW 03 juga disebabkan luapan Kali Ciliwung.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #27ae60; margin: 1.5rem 0;">"Genangan sudah berangsur surut sejak pukul 05.00. Alhamdulillah, siang ini sudah surut total," terangnya.</p>
-                    
-                    <p>Menurutnya, untuk membantu pembersihan pascagenangan dikerahkan 50 personel Pasukan Oranye, 10 personel Pasukan Biru, dan tujuh personel Pasukan Kuning. Kemudian, kendaraan dinas operasional dari Sudin Gulkarmat dan Sudin Tamhut Jakarta Selatan masing-masing satu unit.</p>
-                    
-                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #2980b9; margin: 1.5rem 0;">"Melalui penanganan cepat dan cuaca cerah pagi hingga siang ini membuat lingkungan warga kembali bersih dan mereka sudah bisa beraktivitas normal kembali," tandasnya.</p>
-                </div>
-                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #ecf0f1; display: flex; gap: 1rem;">
-                    <button onclick="window.print()" style="background: #c0392b; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fas fa-print"></i> Cetak Artikel</button>
-                    <button onclick="document.getElementById('penanganan-banjir-full').style.display='none'" style="background: #95a5a6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fas fa-times"></i> Tutup</button>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -196,8 +513,8 @@
                 <button class="filter-tab" data-filter="layanan">
                     <i class="fas fa-hand-holding-heart"></i> Pelayanan
                 </button>
-                <button class="filter-tab" data-filter="pengumuman">
-                    <i class="fas fa-bullhorn"></i> Pengumuman
+                <button class="filter-tab" data-filter="kesiapsiagaan">
+                    <i class="fas fa-shield-alt"></i> Kesiapsiagaan
                 </button>
             </div>
         </div>
@@ -207,180 +524,277 @@
     <section class="news-grid-section">
         <div class="container">
             <div class="news-grid">
-                <!-- News Card 1 -->
-                <article class="news-card" id="penataan-kawasan">
+                <!-- News Card 1: Penataan Kawasan -->
+                <article class="news-card" data-category="pembangunan">
                     <div class="news-image">
                         <img src="images/penataan-kawasan-2025.png" alt="Penataan Kawasan Rawajati Barat" class="news-img">
-                        <div class="news-category-badge">Pembangunan</div>
+                        <div class="news-category-badge pembangunan">
+                            <i class="fas fa-hard-hat"></i> Pembangunan
+                        </div>
                     </div>
                     <div class="news-content">
                         <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> Selasa, 30 September 2025</span>
-                            <span class="news-author"><i class="fas fa-user"></i> Tiyo Surya Sakti</span>
+                            <span class="news-date"><i class="fas fa-calendar"></i> 30 September 2025</span>
+                            <span class="news-author"><i class="fas fa-user-edit"></i> Tiyo Surya Sakti</span>
                         </div>
-                        <h3>Warga Apresiasi Penataan Kawasan Unggulan di Jalan Rawajati Barat</h3>
-                        <p>Penataan Kawasan Unggulan Triwulan III di Jalan Rawajati Barat, RT 01/04, Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan, rampung dilakukan dan diapresiasi warga.</p>
-                        <a href="#penataan-kawasan-full" onclick="document.getElementById('penataan-kawasan-full').style.display='block'; return false;" class="read-more">
+                        <h3 class="news-title">Warga Apresiasi Penataan Kawasan Unggulan di Jalan Rawajati Barat</h3>
+                        <p class="news-excerpt">Penataan Kawasan Unggulan Triwulan III di Jalan Rawajati Barat, RT 01/04, rampung dilakukan dan diapresiasi warga.</p>
+                        <a href="#penataan-kawasan-full" class="read-more" onclick="showArticle('penataan-kawasan-full'); return false;">
                             <i class="fas fa-arrow-right"></i> Baca Selengkapnya
                         </a>
                     </div>
                 </article>
                 
-                <!-- News Card 2 -->
-                <article class="news-card" id="penanganan-banjir">
+                <!-- News Card 2: Penanganan Banjir -->
+                <article class="news-card" data-category="layanan">
                     <div class="news-image">
                         <img src="images/penanganan-banjir-2025.png" alt="Penanganan Banjir Rawajati" class="news-img">
-                        <div class="news-category-badge">Pelayanan</div>
+                        <div class="news-category-badge layanan">
+                            <i class="fas fa-hand-holding-heart"></i> Pelayanan
+                        </div>
                     </div>
                     <div class="news-content">
                         <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> Senin, 07 Juli 2025</span>
-                            <span class="news-author"><i class="fas fa-user"></i> Tiyo Surya Sakti</span>
+                            <span class="news-date"><i class="fas fa-calendar"></i> 07 Juli 2025</span>
+                            <span class="news-author"><i class="fas fa-user-edit"></i> Tiyo Surya Sakti</span>
                         </div>
-                        <h3>Penanganan Banjir di Pejaten Timur dan Rawajati Berlangsung Optimal</h3>
-                        <p>Penanganan pascabanjir di Kelurahan Pejaten Timur dan Rawajati berlangsung optimal dengan pengerahan 40 personel gabungan dan dukungan Sudin Lingkungan Hidup serta Gulkarmat.</p>
-                        <a href="#penanganan-banjir-full" onclick="document.getElementById('penanganan-banjir-full').style.display='block'; return false;" class="read-more">
+                        <h3 class="news-title">Penanganan Banjir di Pejaten Timur dan Rawajati Berlangsung Optimal</h3>
+                        <p class="news-excerpt">Penanganan pascabanjir di Kelurahan Pejaten Timur dan Rawajati berlangsung optimal dengan pengerahan 40 personel gabungan.</p>
+                        <a href="#penanganan-banjir-full" class="read-more" onclick="showArticle('penanganan-banjir-full'); return false;">
                             <i class="fas fa-arrow-right"></i> Baca Selengkapnya
                         </a>
                     </div>
                 </article>
                 
-                <!-- News Card 2 -->
-                <article class="news-card">
+                <!-- News Card 3: Simulasi Bencana -->
+                <article class="news-card" data-category="kesiapsiagaan">
                     <div class="news-image">
-                        <img src="https://images.unsplash.com/photo-1558449028-b530b9b8936d?w=600" alt="Hidroponik Urban Farming" class="news-img">
-                        <div class="news-category-badge">Pembangunan</div>
+                        <img src="images/simulasi-bencana-2025.png" alt="Simulasi Bencana Rawajati" class="news-img">
+                        <div class="news-category-badge kesiapsiagaan">
+                            <i class="fas fa-shield-alt"></i> Kesiapsiagaan
+                        </div>
                     </div>
                     <div class="news-content">
                         <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> 2024</span>
+                            <span class="news-date"><i class="fas fa-calendar"></i> 23 Desember 2025</span>
+                            <span class="news-author"><i class="fas fa-user-edit"></i> Tiyo Surya Sakti</span>
                         </div>
-                        <h3>Kantor Kelurahan Rawajati Dilengkapi Hidroponik Urban Farming</h3>
-                        <p>Kantor Kelurahan Rawajati kini dilengkapi dengan fasilitas hidroponik urban farming sebagai bagian dari program ketahanan pangan dan penghijauan lingkungan perkantoran.</p>
-                        <a href="https://m.beritajakarta.id/read/141936/kantor-kelurahan-rawajati-dilengkapi-hidroponik-urban-farming" target="_blank" class="read-more">
-                            <i class="fas fa-arrow-right"></i> Baca Selengkapnya
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- News Card 3 -->
-                <article class="news-card">
-                    <div class="news-image">
-                        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600" alt="Percantik Kolong Flyover" class="news-img">
-                        <div class="news-category-badge">Pembangunan</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> 2024</span>
-                        </div>
-                        <h3>Kelurahan Rawajati Percantik Kolong Flyover Kalibata</h3>
-                        <p>Kelurahan Rawajati melakukan penataan dan penghijauan di area kolong flyover Kalibata untuk menjadikan ruang publik yang lebih bermanfaat dan estetis bagi masyarakat.</p>
-                        <a href="https://m.beritajakarta.id/potret-jakarta/album/18784/kelurahan-rawajati-percantik-kolong-flyover-kalibata" target="_blank" class="read-more">
-                            <i class="fas fa-arrow-right"></i> Baca Selengkapnya
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- News Card 4 -->
-                <article class="news-card">
-                    <div class="news-image">
-                        <img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=600" alt="Normalisasi Kali Ciliwung" class="news-img">
-                        <div class="news-category-badge">Pembangunan</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> 2024</span>
-                        </div>
-                        <h3>Pemprov DKI Fokus Tuntaskan Normalisasi Kali Ciliwung</h3>
-                        <p>Pemerintah Provinsi DKI Jakarta terus fokus menyelesaikan normalisasi Kali Ciliwung yang melintasi Kelurahan Rawajati untuk mencegah banjir dan meningkatkan kualitas air.</p>
-                        <a href="https://m.beritajakarta.id/read/142178/pemprov-dki-fokus-tuntaskan-normalisasi-kali-ciliwung" target="_blank" class="read-more">
-                            <i class="fas fa-arrow-right"></i> Baca Selengkapnya
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- News Card 5 - Placeholder untuk kegiatan kelurahan -->
-                <article class="news-card">
-                    <div class="news-image">
-                        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600" alt="Kegiatan Masyarakat" class="news-img">
-                        <div class="news-category-badge">Kegiatan</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> Maret 2026</span>
-                        </div>
-                        <h3>Kerja Bakti Massal Warga Rawajati</h3>
-                        <p>Warga Kelurahan Rawajati rutin mengadakan kerja bakti massal untuk menjaga kebersihan lingkungan dan memperkuat gotong royong antarwarga.</p>
-                        <a href="#" class="read-more">
-                            <i class="fas fa-arrow-right"></i> Baca Selengkapnya
-                        </a>
-                    </div>
-                </article>
-                
-                <!-- News Card 6 - Placeholder untuk kegiatan kelurahan -->
-                <article class="news-card">
-                    <div class="news-image">
-                        <img src="https://images.unsplash.com/photo-1576091160550-217358c7e618?w=600" alt="Posyandu" class="news-img">
-                        <div class="news-category-badge">Kegiatan</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> Maret 2026</span>
-                        </div>
-                        <h3>Posyandu Kelurahan Rawajati Layani Ratusan Balita</h3>
-                        <p>Posyandu di Kelurahan Rawajati secara rutin melayani ratusan balita untuk pemeriksaan kesehatan, imunisasi, dan pemberian vitamin.</p>
-                        <a href="#" class="read-more">
+                        <h3 class="news-title">150 Personel Gabungan Ikuti Simulasi Kesiapsiagaan Bencana di Rawajati</h3>
+                        <p class="news-excerpt">Camat Pancoran, Alamsah memimpin langsung apel dan simulasi kesiapsiagaan bencana yang diikuti 150 personel gabungan.</p>
+                        <a href="#simulasi-bencana-full" class="read-more" onclick="showArticle('simulasi-bencana-full'); return false;">
                             <i class="fas fa-arrow-right"></i> Baca Selengkapnya
                         </a>
                     </div>
                 </article>
             </div>
             
-            <!-- Pagination -->
-            <div class="pagination">
-                <a href="#" class="page-item active">1</a>
-                <a href="#" class="page-item">2</a>
-                <a href="#" class="page-item">
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="container">
-            <div class="newsletter-content">
-                <div class="newsletter-icon">
-                    <i class="fas fa-envelope-open-text"></i>
-                </div>
-                <div class="newsletter-text">
-                    <h2>Berlangganan Newsletter</h2>
-                    <p>Dapatkan informasi terkini dari Kelurahan Rawajati langsung ke email Anda</p>
-                </div>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Masukkan email Anda" required>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Berlangganan
+            <!-- Full Article: Penataan Kawasan -->
+            <div class="full-article-section" id="penataan-kawasan-full">
+                <div class="article-header">
+                    <h2 class="article-title">Warga Apresiasi Penataan Kawasan Unggulan di Jalan Rawajati Barat</h2>
+                    <button onclick="hideArticle('penataan-kawasan-full')" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: #95a5a6; transition: all 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='#95a5a6'">
+                        <i class="fas fa-times-circle"></i>
                     </button>
-                </form>
+                </div>
+                
+                <div class="article-meta">
+                    <div class="article-meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Selasa, 30 September 2025 08:32 WIB</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="fas fa-eye"></i>
+                        <span>1,094 views</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</span>
+                    </div>
+                </div>
+                
+                <div class="article-featured-image">
+                    <img src="images/penataan-kawasan-2025.png" alt="Penataan Kawasan Rawajati Barat">
+                </div>
+                
+                <div class="article-content">
+                    <p style="font-size: 1.15rem; font-weight: 600; color: #2c3e50; margin-bottom: 2rem;">
+                        Penataan Kawasan Unggulan Triwulan III di Jalan Rawajati Barat, RT 01/04, Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan, rampung dilakukan dan diapresiasi warga.
+                    </p>
+                    
+                    <div class="quote-box">
+                        "Sangat bagus, memang lokasi ini sebelumnya sangat tidak terurus, kumuh. Semoga saja lokasi lainnya juga ditata nantinya, supaya setiap RW punya daya tariknya masing-masing."
+                    </div>
+                    
+                    <p>Herman, salah seorang warga, mengungkapkan kebahagiaannya atas penataan kawasan yang membuat lingkungan semakin indah, asri, bersih, dan berwarna.</p>
+                    
+                    <p>Lurah Rawajati, Sariman menjelaskan, sebelum ditata, dulunya lahan tersebut adalah lahan kosong yang tidak terawat hingga banyak orang tidak bertanggung jawab membuang sampah di lokasi itu.</p>
+                    
+                    <div class="quote-box" style="border-left-color: #27ae60;">
+                        "Posisi lahan berada di pinggir rel kereta, jadi banyak warga juga menyebrang melalui pagar perlintasan yang bolong."
+                    </div>
+                    
+                    <p>Sariman menjelaskan, dalam melakukan penataan di atas lahan seluas 120 meter persegi dikerahkan lima personel Pasukan Oranye.</p>
+                    
+                    <p>Dalam penataan kawasan itu, imbuhnya, juga bekerjasama dengan jajaran Sudin Bina Marga untuk merapikan jalan setapak, Sudin KPKP terkait ketahanan pangan, Sudin Lingkungan Hidup membantu tempat pembuangan sampah dan Sudin Tamhut Jakarta Selatan dalam hal penghijauan.</p>
+                    
+                    <div class="quote-box" style="border-left-color: #3498db;">
+                        "Pagar pembatas juga kami tambah dengan besi dan kayu. Kemudian agar terlihat indah dan rapi kami tambahkan mural."
+                    </div>
+                    
+                    <p>Sariman mengimbau kepada warga, pengurus RT dan RW setempat untuk selalu menjaga kebersihan di lokasi penataan yang sudah rapi dan indah ini, terutama untuk tidak membuang sampah sembarangan maupun melakukan vandalisme.</p>
+                    
+                    <div class="highlight-box">
+                        "Seluruh penataan yang kita lakukan terus kita jaga. Jadi saya minta warga juga berkontribusi aktif menjaganya dengan baik."
+                    </div>
+                </div>
+                
+                <div class="article-footer">
+                    <button onclick="window.print()" class="btn-print">
+                        <i class="fas fa-print"></i> Cetak Artikel
+                    </button>
+                    <button onclick="hideArticle('penataan-kawasan-full')" class="btn-close">
+                        <i class="fas fa-times"></i> Tutup
+                    </button>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Punya Informasi atau Kegiatan untuk Dibagikan?</h2>
-                <p>Kirimkan berita atau informasi kegiatan dari wilayah Anda untuk dipublikasikan di website kelurahan.</p>
-                <div class="cta-buttons">
-                    <a href="kontak.html" class="btn btn-primary">
-                        <i class="fas fa-envelope"></i> Kirim Berita
-                    </a>
-                    <a href="https://wa.me/6281234567890" class="btn btn-secondary">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+            
+            <!-- Full Article: Penanganan Banjir -->
+            <div class="full-article-section" id="penanganan-banjir-full">
+                <div class="article-header">
+                    <h2 class="article-title">Penanganan Banjir di Pejaten Timur dan Rawajati Berlangsung Optimal</h2>
+                    <button onclick="hideArticle('penanganan-banjir-full')" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: #95a5a6; transition: all 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='#95a5a6'">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+                
+                <div class="article-meta">
+                    <div class="article-meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Senin, 07 Juli 2025 14:32 WIB</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="fas fa-eye"></i>
+                        <span>941 views</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</span>
+                    </div>
+                </div>
+                
+                <div class="article-featured-image">
+                    <img src="images/penanganan-banjir-2025.png" alt="Penanganan Banjir Rawajati">
+                </div>
+                
+                <div class="article-content">
+                    <p style="font-size: 1.15rem; font-weight: 600; color: #2c3e50; margin-bottom: 2rem;">
+                        Penanganan pascabanjir di Kelurahan Pejaten Timur, Kecamatan Pasar Minggu dan Kelurahan Rawajati, Pancoran Jakarta Selatan berlangsung optimal.
+                    </p>
+                    
+                    <div class="quote-box">
+                        "Siang ini Membuat lingkungan warga kembali bersih"
+                    </div>
+                    
+                    <p>Lurah Pejaten Timur, Edy Sugiarto menjelaskan, penanganan pascabanjir di wilayahnya dilakukan sejak Senin pagi dengan pengerahan 40 personel gabungan yang terdiri dari petugas Suku Dinas Lingkungan Hidup (LH), Gulkarmat, dan pasukan oranye dari Sudin Pertamanan dan Hutan Kota (PHK).</p>
+                    
+                    <p>"Kami mulai pagi tadi. Ada sekitar 40 personel yang dikerahkan untuk membersihkan lumpur dan sampah pascabanjir," ujar Edy saat ditemui di lokasi.</p>
+                    
+                    <div class="quote-box" style="border-left-color: #27ae60;">
+                        "Lumpur dan sampah kita bersihkan. Setelah itu, langsung kita angkut ke TPS sementara."
+                    </div>
+                    
+                    <p>Edy menambahkan, untuk mempercepat proses pembersihan, pihaknya juga meminta bantuan alat berat dari Suku Dinas Bina Marga untuk mengangkut lumpur yang sudah dibersihkan.</p>
+                    
+                    <p>"Kita berkoordinasi dengan Bina Marga untuk membawa alat berat seperti loader dan truk pengangkut. Ini agar proses evakuasi lumpur bisa lebih cepat," jelasnya.</p>
+                    
+                    <p>Sementara itu, Lurah Rawajati, Sariman mengatakan, penanganan di wilayahnya juga dilakukan dengan intensif. pihaknya fokus membersihkan fasilitas umum yang terdampak banjir.</p>
+                    
+                    <div class="quote-box" style="border-left-color: #3498db;">
+                        "Kami prioritaskan membersihkan jalan, taman, dan fasilitas umum lainnya agar aktivitas warga bisa kembali normal."
+                    </div>
+                    
+                    <p>Sariman mengapresiasi kerjasama semua pihak dalam penanganan banjir ini. Menurutnya, sinergi antara kelurahan, sudin, dan masyarakat sangat penting untuk mempercepat pemulihan.</p>
+                    
+                    <div class="highlight-box">
+                        "Kami berterima kasih kepada semua pihak yang telah membantu. Dengan kerjasama ini, kami yakin Rawajati dan Pejaten Timur akan cepat pulih dari bencana banjir."
+                    </div>
+                </div>
+                
+                <div class="article-footer">
+                    <button onclick="window.print()" class="btn-print">
+                        <i class="fas fa-print"></i> Cetak Artikel
+                    </button>
+                    <button onclick="hideArticle('penanganan-banjir-full')" class="btn-close">
+                        <i class="fas fa-times"></i> Tutup
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Full Article: Simulasi Bencana -->
+            <div class="full-article-section" id="simulasi-bencana-full">
+                <div class="article-header">
+                    <h2 class="article-title">150 Personel Gabungan Ikuti Simulasi Kesiapsiagaan Bencana di Rawajati</h2>
+                    <button onclick="hideArticle('simulasi-bencana-full')" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: #95a5a6; transition: all 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='#95a5a6'">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+                
+                <div class="article-meta">
+                    <div class="article-meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Selasa, 23 Desember 2025 12:32 WIB</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="fas fa-eye"></i>
+                        <span>1,247 views</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</span>
+                    </div>
+                </div>
+                
+                <div class="article-featured-image">
+                    <img src="images/simulasi-bencana-2025.png" alt="Simulasi Kesiapsiagaan Bencana Rawajati">
+                </div>
+                
+                <div class="article-content">
+                    <p style="font-size: 1.15rem; font-weight: 600; color: #2c3e50; margin-bottom: 2rem;">
+                        Camat Pancoran, Alamsah memimpin langsung apel dan simulasi kesiapsiagaan bencana yang diikuti sebanyak 150 personel gabungan, Selasa (23/12). Kegiatan berlangsung di halaman Kantor Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan.
+                    </p>
+                    
+                    <div class="quote-box">
+                        "Kami berharap dengan adanya simulasi ini, semua pihak bisa lebih siap dan sigap dalam menghadapi bencana, khususnya banjir. Koordinasi antar instansi harus terus diperkuat."
+                    </div>
+                    
+                    <p>Alamsah menuturkan, Kelurahan Rawajati merupakan salah satu wilayah yang sering terdampak banjir karena lokasinya yang berdekatan dengan aliran Kali Ciliwung. Setidaknya ada tiga RW yang kerap terendam banjir setiap tahunnya.</p>
+                    
+                    <p>Sementara itu, Kepala Bidang Sumber Daya Air, Badan Pengembangan Infrastruktur (BPI) DKI Jakarta, Hendi Mulyana menjelaskan, saat ini pembangunan pompa di Rawajati yang dikerjakan oleh Balai Besar Wilayah Sungai (BBWS) Ciliwung Cisadane sudah mencapai 50 persen.</p>
+                    
+                    <div class="quote-box" style="border-left-color: #27ae60;">
+                        "Pembangunan pompa ini diharapkan dapat mengurangi dampak banjir di wilayah Rawajati. Target kami, proyek ini selesai sebelum musim hujan berikutnya."
+                    </div>
+                    
+                    <p>Lurah Rawajati, Sariman menambahkan, dari tiga RW yang terdampak, RW 07 merupakan wilayah yang paling parah. Saat banjir datang, warga biasanya mengungsi ke lantai dua rumah mereka.</p>
+                    
+                    <div class="quote-box" style="border-left-color: #3498db;">
+                        "Kami sudah menyiapkan posko pengungsian di beberapa titik. Kerjasama dengan BPBD juga sangat baik dalam hal penyiapan tenda dan logistik."
+                    </div>
+                    
+                    <p>Kepala Pelaksana BPBD Jakarta Selatan, Dedi Kusmana mengatakan, pihaknya mengerahkan Pasukan Oranye untuk mendirikan tenda di lokasi simulasi. Mereka juga mempraktikkan cara menyiapkan dapur umum dan mendistribusikan bantuan logistik kepada warga terdampak.</p>
+                    
+                    <div class="highlight-box">
+                        "Simulasi ini bukan sekadar latihan, tetapi bentuk komitmen kami untuk melindungi masyarakat dari bencana. Kesiapsiagaan adalah kunci keselamatan."
+                    </div>
+                </div>
+                
+                <div class="article-footer">
+                    <button onclick="window.print()" class="btn-print">
+                        <i class="fas fa-print"></i> Cetak Artikel
+                    </button>
+                    <button onclick="hideArticle('simulasi-bencana-full')" class="btn-close">
+                        <i class="fas fa-times"></i> Tutup
+                    </button>
                 </div>
             </div>
         </div>
@@ -388,94 +802,94 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-col">
-                        <div class="footer-logo">
-                            <img src="emblem.svg" alt="Logo Jakarta">
-                            <div class="footer-logo-text">
-                                <h3>KELURAHAN RAWAJATI</h3>
-                                <p>Kecamatan Pancoran, Jakarta Selatan</p>
-                            </div>
-                        </div>
-                        <p class="footer-desc">
-                            Melayani masyarakat dengan hati untuk mewujudkan Rawajati yang maju, sejahtera, dan berkarakter.
-                        </p>
-                        <div class="footer-social">
-                            <a href="https://instagram.com/kelurahan_rawajati" target="_blank"><i class="fab fa-instagram"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h4>Link Cepat</h4>
-                        <ul class="footer-links">
-                            <li><a href="profil.html">Profil Kelurahan</a></li>
-                            <li><a href="pelayanan-kependudukan.html">Layanan Kependudukan</a></li>
-                            <li><a href="pelayanan-pm1.html">Surat Keterangan PM1</a></li>
-                            <li><a href="data.html">Data Kelurahan</a></li>
-                            <li><a href="berita.html">Berita & Kegiatan</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h4>Layanan</h4>
-                        <ul class="footer-links">
-                            <li><a href="pelayanan-kependudukan.html">KTP & Kartu Keluarga</a></li>
-                            <li><a href="pelayanan-pm1.html">Surat Domisili</a></li>
-                            <li><a href="pelayanan-ahli-waris.html">Surat Ahli Waris</a></li>
-                            <li><a href="kesiapsiagaan.html">Kesiapsiagaan Bencana</a></li>
-                            <li><a href="kontak.html">Pengaduan Masyarakat</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-col">
-                        <h4>Kontak Kami</h4>
-                        <ul class="footer-contact">
-                            <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Jl. Rawajati Barat RT.006 RW.04, Pancoran, Jakarta Selatan 12750</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-phone"></i>
-                                <span>(021) 7996204</span>
-                            </li>
-                            <li>
-                                <i class="fab fa-whatsapp"></i>
-                                <span>+62 812-3456-7890</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-envelope"></i>
-                                <span>kelurahan@rawajati.jakarta.go.id</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-bottom-content">
-                    <p>&copy; 2026 Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan. All rights reserved.</p>
-                    <div class="footer-credits">
-                        <span>Created By : Fajar Muhamad Reza (Diklat PKP 41)</span>
-                    </div>
-                </div>
-            </div>
+        <div class="container">
+            <p style="text-align: center; margin: 0; padding: 2rem 0; color: rgba(255,255,255,0.8);">
+                Created By : <strong style="color: white;">Fajar Muhamad Reza (Diklat PKP 41)</strong>
+            </p>
         </div>
     </footer>
 
-    <!-- Floating Chatbot Button -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/chatbot.js"></script>
+    <script>
+        // Article Modal Functions
+        function showArticle(articleId) {
+            // Hide all articles first
+            document.querySelectorAll('.full-article-section').forEach(article => {
+                article.style.display = 'none';
+            });
+            
+            // Show selected article
+            const article = document.getElementById(articleId);
+            if (article) {
+                article.style.display = 'block';
+                article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        function hideArticle(articleId) {
+            const article = document.getElementById(articleId);
+            if (article) {
+                article.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        // Filter Functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                // Filter news cards
+                document.querySelectorAll('.news-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
