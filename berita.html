@@ -93,6 +93,49 @@
                     </a>
                 </div>
             </div>
+            
+            <!-- Full Article Section -->
+            <div class="full-article-section" id="penataan-kawasan-full" style="display:none; margin-top: 3rem; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin: 0; color: #c0392b;">Warga Apresiasi Penataan Kawasan Unggulan di Jalan Rawajati Barat</h2>
+                    <button onclick="document.getElementById('penataan-kawasan-full').style.display='none'" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #666;"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="news-meta" style="margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #ecf0f1;">
+                    <span style="margin-right: 1.5rem;"><i class="fas fa-calendar"></i> Selasa, 30 September 2025 08:32 WIB</span>
+                    <span style="margin-right: 1.5rem;"><i class="fas fa-eye"></i> 1094 views</span>
+                    <span><i class="fas fa-user"></i> Reporter: Tiyo Surya Sakti | Editor: Toni Riyanto</span>
+                </div>
+                <img src="images/penataan-kawasan-2025.png" alt="Penataan Kawasan Rawajati Barat" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+                <div class="article-content" style="line-height: 1.8; color: #333;">
+                    <p style="font-size: 1.1rem; font-weight: 600; color: #2c3e50; margin-bottom: 1.5rem;">Penataan Kawasan Unggulan Triwulan III di Jalan Rawajati Barat, RT 01/04, Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan, rampung dilakukan dan diapresiasi warga.</p>
+                    
+                    <p><strong>"Sangat bagus"</strong></p>
+                    
+                    <p>Salah seorang warga, Herman mengatakan, penataan kawasan yang dilakukan pihak kelurahan membuat lingkungan semakin indah, asri, bersih, dan berwarna.</p>
+                    
+                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #c0392b; margin: 1.5rem 0;">"Sangat bagus, memang lokasi ini sebelumnya sangat tidak terurus, kumuh. Semoga saja lokasi lainnya juga ditata nantinya, supaya setiap RW punya daya tariknya masing-masing," ujarnya, Selasa (30/9).</p>
+                    
+                    <h3 style="color: #c0392b; margin-top: 2rem;">Progres Penataan Kawasan Unggulan di Rorotan Capai 95 Persen</h3>
+                    
+                    <p>Sementara itu, Lurah Rawajati, Sariman menjelaskan, sebelum ditata, dulunya lahan tersebut adalah lahan kosong yang tidak terawat hingga banyak orang tidak bertanggung jawab membuang sampah di lokasi itu.</p>
+                    
+                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #27ae60; margin: 1.5rem 0;">"Posisi lahan berada di pinggir rel kereta, jadi banyak warga juga menyebrang melalui pagar perlintasan yang bolong," ujarnya, Selasa (30/9).</p>
+                    
+                    <p>Sariman menjelaskan, dalam melakukan penataan di atas lahan seluas 120 meter persegi dikerahkan lima personel Pasukan Oranye.</p>
+                    
+                    <p>Dalam penataan kawasan itu, imbuhnya, juga bekerjasama dengan jajaran Sudin Bina Marga untuk merapikan jalan setapak, Sudin KPKP terkait ketahanan pangan, Sudin Lingkungan Hidup membantu tempat pembuangan sampah dan Sudin Tamhut Jakarta Selatan dalam hal penghijauan.</p>
+                    
+                    <p style="background: #f8f9fa; padding: 1rem; border-left: 4px solid #2980b9; margin: 1.5rem 0;">"Pagar pembatas juga kami tambah dengan besi dan kayu. Kemudian agar terlihat indah dan rapi kami tambahkan mural," terangnya.</p>
+                    
+                    <p>Sariman mengimbau kepada warga, pengurus RT dan RW setempat untuk selalu menjaga kebersihan di lokasi penataan yang sudah rapi dan indah ini, terutama untuk tidak membuang sampah sembarangan maupun melakukan vandalisme.</p>
+                    
+                    <p style="background: #fff3cd; padding: 1rem; border-left: 4px solid #f39c12; margin: 1.5rem 0; font-weight: 600;">"Seluruh penataan yang kita lakukan terus kita jaga. Jadi saya minta warga juga berkontribusi aktif menjaganya dengan baik," tandasnya.</p>
+                </div>
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid #ecf0f1; display: flex; gap: 1rem;">
+                    <button onclick="window.print()" style="background: #c0392b; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fas fa-print"></i> Cetak Artikel</button>
+                    <button onclick="document.getElementById('penataan-kawasan-full').style.display='none'" style="background: #95a5a6; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600;"><i class="fas fa-times"></i> Tutup</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -124,18 +167,19 @@
         <div class="container">
             <div class="news-grid">
                 <!-- News Card 1 -->
-                <article class="news-card">
+                <article class="news-card" id="penataan-kawasan">
                     <div class="news-image">
-                        <img src="https://multimedia.beritajakarta.id/photo/2025_669c4a4d0d31e5c5c0f5e5e5d5c5e5e5/penataan-kawasan-unggulan-jalan-rawajati-barat.jpg" alt="Penataan Kawasan Rawajati Barat" class="news-img" onerror="this.src='https://images.unsplash.com/photo-1444653614773-995cb1ef902a?w=600'">
+                        <img src="images/penataan-kawasan-2025.png" alt="Penataan Kawasan Rawajati Barat" class="news-img">
                         <div class="news-category-badge">Pembangunan</div>
                     </div>
                     <div class="news-content">
                         <div class="news-meta">
-                            <span class="news-date"><i class="fas fa-calendar"></i> 2025</span>
+                            <span class="news-date"><i class="fas fa-calendar"></i> Selasa, 30 September 2025</span>
+                            <span class="news-author"><i class="fas fa-user"></i> Tiyo Surya Sakti</span>
                         </div>
                         <h3>Warga Apresiasi Penataan Kawasan Unggulan di Jalan Rawajati Barat</h3>
-                        <p>Pemerintah Provinsi DKI Jakarta menata kawasan unggulan di Jalan Rawajati Barat untuk meningkatkan estetika dan kenyamanan warga. Warga setempat mengapresiasi penataan ini karena membuat lingkungan lebih asri dan nyaman.</p>
-                        <a href="https://m.beritajakarta.id/read/147665/warga-apresiasi-penataan-kawasan-unggulan-di-jalan-rawajati-barat" target="_blank" class="read-more">
+                        <p>Penataan Kawasan Unggulan Triwulan III di Jalan Rawajati Barat, RT 01/04, Kelurahan Rawajati, Kecamatan Pancoran, Jakarta Selatan, rampung dilakukan dan diapresiasi warga.</p>
+                        <a href="#penataan-kawasan-full" onclick="document.getElementById('penataan-kawasan-full').style.display='block'; return false;" class="read-more">
                             <i class="fas fa-arrow-right"></i> Baca Selengkapnya
                         </a>
                     </div>
