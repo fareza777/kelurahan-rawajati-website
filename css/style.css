@@ -387,10 +387,11 @@ img {
 }
 
 .hero-stat-item .stat-percent {
-    color: var(--white) !important;
-    font-weight: 800;
-    font-size: 42px;
-    font-family: var(--font-heading);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 14px;
+    font-family: var(--font-body);
+    margin-left: 2px;
 }
 
 .stat-number {
