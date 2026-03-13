@@ -101,8 +101,8 @@ function createChatWidget() {
         <div id="chatbot-container">
             <div id="chatbot-button" onclick="toggleChat()">
                 <div class="ai-bubble">AI</div>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.75V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.75c-.6-.36-1-1.01-1-1.75a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5A2.5 2.5 0 0 0 7.5 18A2.5 2.5 0 0 0 10 15.5A2.5 2.5 0 0 0 7.5 13M16.5 13A2.5 2.5 0 0 0 14 15.5A2.5 2.5 0 0 0 16.5 18A2.5 2.5 0 0 0 19 15.5A2.5 2.5 0 0 0 16.5 13Z"/>
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1M7 8h10a5 5 0 0 1 5 5v6a2 2 0 0 1-2 2h-2v-2h2v-6a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v6h2v2H4a2 2 0 0 1-2-2v-6a5 5 0 0 1 5-5M9 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M15 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M9 17.5c0 .83 1.34 1.5 3 1.5s3-.67 3-1.5"/>
                 </svg>
             </div>
             <div id="chatbot-window" style="display: none;">
@@ -161,15 +161,15 @@ function addChatStyles() {
         
         .ai-bubble {
             position: absolute;
-            top: 8px;
-            right: 8px;
+            top: 5px;
+            right: 5px;
             background: white;
             color: #dc2626;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            padding: 6px 12px;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             font-family: Arial, sans-serif;
             z-index: 10;
         }
