@@ -468,49 +468,6 @@
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
         <i class="fas fa-arrow-up"></i>
     </button>
-    
-    <div class="chatbot-container">
-        <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()" aria-label="Open chatbot">
-            <i class="fas fa-robot"></i>
-            <span class="chatbot-badge">24/7</span>
-        </button>
-        
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <div class="chatbot-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="chatbot-info">
-                    <h4>Rawajati AI</h4>
-                    <span class="chatbot-status"><i class="fas fa-circle"></i> Online</span>
-                </div>
-                <button class="chatbot-close" onclick="toggleChatbot()"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <div class="chatbot-messages" id="chatbotMessages">
-                <div class="message bot">
-                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
-                    <div class="message-content">
-                        <p>Halo! Saya Rawajati AI, asisten virtual Kelurahan Rawajati.</p>
-                        <p>Saya bisa membantu Anda dengan:</p>
-                        <ul>
-                            <li>Informasi persyaratan dokumen</li>
-                            <li>Prosedur pelayanan publik</li>
-                            <li>Jam operasional kantor</li>
-                            <li>Lokasi dan kontak</li>
-                            <li>Informasi kegiatan & berita</li>
-                        </ul>
-                        <p>Apa yang bisa saya bantu hari ini?</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Tulis pertanyaan Anda..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
 
     <!-- Scripts -->
     <script src="js/main.js"></script>
