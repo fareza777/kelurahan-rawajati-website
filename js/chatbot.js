@@ -353,7 +353,7 @@ function getCurrentTime() {
 }
 
 // Send message
-function sendMessage() {
+async function sendMessage() {
     const input = document.getElementById('chatbot-input');
     const message = input.value.trim();
     
@@ -367,8 +367,8 @@ function sendMessage() {
     showTypingIndicator();
     
     // Process message
-    setTimeout(() => {
-        const response = processMessage(message);
+    setTimeout(async () => {
+        const response = await processMessage(message);
         hideTypingIndicator();
         addMessage(response, 'bot');
     }, 1000 + Math.random() * 500);
@@ -412,7 +412,7 @@ function hideTypingIndicator() {
 }
 
 // Process message - FAQ matching + AI fallback
-function processMessage(message) {
+async function processMessage(message) {
     const lowerMessage = message.toLowerCase();
     
     // Try FAQ matching first
@@ -422,7 +422,7 @@ function processMessage(message) {
     }
     
     // Fallback to AI
-    return callQwenAI(message);
+    return await callQwenAI(message);
 }
 
 // Find FAQ match with keyword matching
