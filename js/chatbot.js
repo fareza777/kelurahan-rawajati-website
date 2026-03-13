@@ -100,9 +100,9 @@ function createChatWidget() {
     const chatHTML = `
         <div id="chatbot-container">
             <div id="chatbot-button" onclick="toggleChat()">
-                <span class="ai-badge">AI</span>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM11 7H13V11H17V13H13V17H11V13H7V11H11V7Z" fill="white"/>
+                <div class="ai-bubble">AI</div>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.75V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.75c-.6-.36-1-1.01-1-1.75a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5A2.5 2.5 0 0 0 7.5 18A2.5 2.5 0 0 0 10 15.5A2.5 2.5 0 0 0 7.5 13M16.5 13A2.5 2.5 0 0 0 14 15.5A2.5 2.5 0 0 0 16.5 18A2.5 2.5 0 0 0 19 15.5A2.5 2.5 0 0 0 16.5 13Z"/>
                 </svg>
             </div>
             <div id="chatbot-window" style="display: none;">
@@ -159,18 +159,19 @@ function addChatStyles() {
             position: relative;
         }
         
-        .ai-badge {
+        .ai-bubble {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #1f2937;
-            color: white;
-            font-size: 11px;
+            top: 8px;
+            right: 8px;
+            background: white;
+            color: #dc2626;
+            font-size: 10px;
             font-weight: bold;
-            padding: 3px 7px;
-            border-radius: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
             font-family: Arial, sans-serif;
+            z-index: 10;
         }
         
         #chatbot-button:hover {
