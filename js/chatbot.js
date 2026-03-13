@@ -157,6 +157,7 @@ function addChatStyles() {
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
             transition: all 0.3s ease;
+            pointer-events: all;
         }
         
         #chatbot-button:hover {
@@ -173,9 +174,10 @@ function addChatStyles() {
             background: white;
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            display: flex;
+            display: none;
             flex-direction: column;
             overflow: hidden;
+            pointer-events: all;
         }
         
         #chatbot-header {
