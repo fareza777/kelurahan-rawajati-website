@@ -3,10 +3,10 @@
 
 const CHATBOT_CONFIG = {
     ALIBABA_CLOUD_API_KEY: 'sk-sp-886dbc40872f4c52ba707842b5196e4f',
-    ALIBABA_CLOUD_ENDPOINT: 'https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
+    ALIBABA_CLOUD_ENDPOINT: 'https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
     MODEL: 'qwen-plus',
     CONFIDENCE_THRESHOLD: 0.6,
-    WELCOME_MESSAGE: 'Halo! Saya Asisten Virtual Kelurahan Rawajati. Ada yang bisa saya bantu?'
+    WELCOME_MESSAGE: 'Halo! Saya Rawajati AI. Ada yang bisa saya bantu?'
 };
 
 // FAQ Database - 15+ entries
@@ -111,7 +111,7 @@ function createChatWidget() {
             </div>
             <div id="chatbot-window" style="display: none;">
                 <div id="chatbot-header">
-                    <span>Asisten Virtual Rawajati</span>
+                    <span>Rawajati AI</span>
                     <button onclick="toggleChat()" id="close-chat">X</button>
                 </div>
                 <div id="chatbot-messages">
@@ -473,7 +473,7 @@ async function callQwenAI(message) {
                     messages: [
                         {
                             role: 'system',
-                            content: 'Anda adalah asisten virtual Kelurahan Rawajati yang ramah dan membantu. Jawab pertanyaan dengan informatif, singkat, dan jelas. Gunakan bahasa Indonesia yang sopan dan mudah dipahami. Jika ditanya tentang pelayanan surat, berikan informasi lengkap tentang syarat, biaya, dan lama proses. Jika tidak tahu jawabannya, arahkan pengguna untuk menghubungi kelurahan langsung.'
+                            content: 'Anda adalah Rawajati AI, asisten virtual Kelurahan Rawajati yang ramah dan membantu. Jawab pertanyaan dengan informatif, singkat, dan jelas. Gunakan bahasa Indonesia yang sopan dan mudah dipahami. Jika ditanya tentang pelayanan surat, berikan informasi lengkap tentang syarat, biaya, dan lama proses. Jika tidak tahu jawabannya, arahkan pengguna untuk menghubungi kelurahan langsung.'
                         },
                         {
                             role: 'user',
