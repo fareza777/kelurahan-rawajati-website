@@ -387,10 +387,12 @@ img {
 }
 
 .hero-stat-item .stat-percent {
-    font-size: 14px;
+    color: inherit;
     opacity: 0.9;
+    font-size: 14px;
     font-weight: 500;
     margin-left: 2px;
+    display: inline-block;
 }
 
 .stat-number {
