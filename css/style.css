@@ -372,10 +372,11 @@ img {
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     padding: 40px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--white);
     backdrop-filter: blur(20px);
     border-radius: var(--border-radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
 }
 
 .hero-stat-item {
@@ -387,13 +388,13 @@ img {
     font-family: var(--font-heading);
     font-size: 42px;
     font-weight: 800;
-    color: var(--white);
+    color: var(--primary-red);
     margin-bottom: 8px;
 }
 
 .stat-label {
     font-size: 14px;
-    opacity: 0.9;
+    color: var(--gray-700);
     font-weight: 500;
 }
 
