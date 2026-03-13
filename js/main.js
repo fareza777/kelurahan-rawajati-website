@@ -35,6 +35,10 @@ function animateCounter(element) {
     const increment = target / (duration / 16); // 60fps
     let current = 0;
     
+    // Check if this counter has a percent symbol sibling
+    const percentSymbol = element.nextElementSibling;
+    const hasPercent = percentSymbol && percentSymbol.classList.contains('stat-percent');
+    
     const updateCounter = () => {
         current += increment;
         if (current < target) {
