@@ -21,32 +21,27 @@ export default async function handler(req) {
       );
     }
 
-    // Call Alibaba Cloud Qwen API
-    const response = await fetch('https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/text-generation/generation', {
+    // Call Alibaba Cloud Qwen API with OpenAI compatible format
+    const response = await fetch('https://coding-intl.dashscope.aliyuncs.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer sk-sp-886dbc40872f4c52ba707842b5196e4f'
       },
       body: JSON.stringify({
-        model: 'qwen-plus',
-        input: {
-          messages: [
-            {
-              role: 'system',
-              content: 'Anda adalah Rawajati AI, asisten virtual Kelurahan Rawajati yang ramah dan membantu. Jawab pertanyaan dengan informatif, singkat, dan jelas. Gunakan bahasa Indonesia yang sopan dan mudah dipahami. Jika ditanya tentang pelayanan surat, berikan informasi lengkap tentang syarat, biaya, dan lama proses. Jika tidak tahu jawabannya, arahkan pengguna untuk menghubungi kelurahan langsung.'
-            },
-            {
-              role: 'user',
-              content: message
-            }
-          ]
-        },
-        parameters: {
-          max_tokens: 500,
-          temperature: 0.7,
-          top_p: 0.8
-        }
+        model: 'qwen3.5-plus',
+        messages: [
+          {
+            role: 'system',
+            content: 'Anda adalah Rawajati AI, asisten virtual Kelurahan Rawajati yang ramah dan membantu. Jawab pertanyaan dengan informatif, singkat, dan jelas. Gunakan bahasa Indonesia yang sopan dan mudah dipahami. Jika ditanya tentang pelayanan surat, berikan informasi lengkap tentang syarat, biaya, dan lama proses. Jika tidak tahu jawabannya, arahkan pengguna untuk menghubungi kelurahan langsung.'
+          },
+          {
+            role: 'user',
+            content: message
+          }
+        ],
+        max_tokens: 500,
+        temperature: 0.7
       })
     });
 
@@ -63,7 +58,7 @@ export default async function handler(req) {
     
     return new Response(
       JSON.stringify({ 
-        response: data.output.choices[0].message.content 
+        response: data.choices[0].message.content 
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
