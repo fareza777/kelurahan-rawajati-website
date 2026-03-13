@@ -2,9 +2,7 @@
 // Hybrid Architecture: FAQ + Alibaba Cloud Qwen API
 
 const CHATBOT_CONFIG = {
-    ALIBABA_CLOUD_API_KEY: 'sk-sp-886dbc40872f4c52ba707842b5196e4f',
-    ALIBABA_CLOUD_ENDPOINT: 'https://dashscope-intl.aliyuncs.com/api/v1/services/aigc/text-generation/generation',
-    MODEL: 'qwen-plus',
+    API_ENDPOINT: '/api/chat',
     CONFIDENCE_THRESHOLD: 0.6,
     WELCOME_MESSAGE: 'Halo! Saya Rawajati AI. Ada yang bisa saya bantu?'
 };
@@ -458,43 +456,27 @@ function findFAQMatch(message) {
     return bestMatch;
 }
 
-// Call Alibaba Cloud Qwen API
+// Call Alibaba Cloud Qwen API via proxy
 async function callQwenAI(message) {
     try {
-        const response = await fetch(CHATBOT_CONFIG.ALIBABA_CLOUD_ENDPOINT, {
+        const response = await fetch(CHATBOT_CONFIG.API_ENDPOINT, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${CHATBOT_CONFIG.ALIBABA_CLOUD_API_KEY}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: CHATBOT_CONFIG.MODEL,
-                input: {
-                    messages: [
-                        {
-                            role: 'system',
-                            content: 'Anda adalah Rawajati AI, asisten virtual Kelurahan Rawajati yang ramah dan membantu. Jawab pertanyaan dengan informatif, singkat, dan jelas. Gunakan bahasa Indonesia yang sopan dan mudah dipahami. Jika ditanya tentang pelayanan surat, berikan informasi lengkap tentang syarat, biaya, dan lama proses. Jika tidak tahu jawabannya, arahkan pengguna untuk menghubungi kelurahan langsung.'
-                        },
-                        {
-                            role: 'user',
-                            content: message
-                        }
-                    ]
-                },
-                parameters: {
-                    max_tokens: 500,
-                    temperature: 0.7,
-                    top_p: 0.8
-                }
+                message: message
             })
         });
         
         if (!response.ok) {
+            const errorData = await response.json();
+            console.error('API Error:', errorData);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         
         const data = await response.json();
-        return data.output.choices[0].message.content;
+        return data.response;
         
     } catch (error) {
         console.error('AI Error:', error);
